@@ -16,7 +16,7 @@ mat-card {
 }
 
 table {
-  width: 80%;
+  width: 79%;
   background-color: #202020;
   box-shadow: none;
   display: inline-table;
@@ -130,7 +130,7 @@ tr.mat-row, tr.mat-footer-row {
 .QuickAccess{
   width: 20%;
   display: inline-block;
-  height: calc(100% - 65px);
+  height: calc(100% - 75px);
   background-color: rgba(19, 18, 18, 0.81);
 
 }
@@ -161,7 +161,8 @@ tr.mat-row, tr.mat-footer-row {
 }
 
 .QuickAccess{
-  text-align: center;
+  text-align: left;
+  padding: 5px;
   user-select: none;
 }
 
@@ -313,7 +314,7 @@ tr.mat-row, tr.mat-footer-row {
 
 .PathObjectLabels span{
   padding: 4px;
-  transition: 300ms;
+  transition: 0.3s;
 }
 
 .PathObjectLabels span:hover{

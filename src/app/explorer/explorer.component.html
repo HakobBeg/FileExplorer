@@ -1,4 +1,4 @@
-<div class="Content" [class.Loading] = explorerModel.loading>
+<div (click)="explorerModel.searchResShow = false;" class="Content" [class.Loading] = explorerModel.loading>
 <mat-card cdkDrag (keydown.enter)="explorerModel.moveIn()" (keydown.escape)="explorerModel.navigateToUp()" (keydown.arrowDown)="explorerModel.stepDownSelected()" (keydown.arrowUp)="explorerModel.stepUpSelected()"  tabindex="0">
   <div class="Panel" cdkDragHandle>
     <div class="Icon"> <img src="../../assets/fileexplorer.png"> <label>File Explorer</label></div>
@@ -21,12 +21,12 @@
     </div>
   </div>
 
-  <div (blur)="explorerModel.searchResShow = false;" class="SearchBar" tabindex="0">
+  <div  class="SearchBar" tabindex="0">
     <img src="../../assets/search.svg" alt="loading">
-    <input  autofocus  #searchbar [(ngModel)]="explorerModel.searchabarTest"  spellcheck="false" [placeholder]="'Search  ' + explorerModel.currentLocation.name">
+    <input   #searchbar [(ngModel)]="explorerModel.searchabarTest"  spellcheck="false" [placeholder]="'Search  ' + explorerModel.currentLocation.name">
     <div  *ngIf="explorerModel.searchResShow" (blur)="explorerModel.searchResShow=false;" class="SearchResults">
-      <div (click)="explorerModel.changeCurrentLocation(file);explorerModel.searchResShow=false" class="SearchResultsContent" *ngFor="let file of explorerModel.searchResult">
-      <img  *ngIf="file.data.type === 'folder'" style="width: 20px;height: 20px" src="../../assets/folder.svg">
+      <div  (click)="explorerModel.changeCurrentLocation(file);explorerModel.searchResShow=false" class="SearchResultsContent" *ngFor="let file of explorerModel.searchResult">
+        <img  *ngIf="file.data.type === 'folder'" style="width: 20px;height: 20px" src="../../assets/folder.svg">
       <img *ngIf="file.data.type === 'file'" style="width: 20px;height: 20px" src="../../assets/text.svg">
         <label>{{file.name}}</label>
       </div>

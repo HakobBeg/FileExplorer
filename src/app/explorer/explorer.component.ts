@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DatabaseWorkerService} from '../../Services/database-worker.service';
 import {FileExplorer} from '../../Models/ExplorerModel';
 import {FileNode} from '../../Models/BTree';
-import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
-import {fromEvent, Subject} from 'rxjs';
+import {fromEvent, merge} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Component({
@@ -21,9 +20,7 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
 
 
   navigateTo(index: number) {
-    for (let i = 0; i < this.explorerModel.currentLocation.data.path.length - index - 1; ++i) {
-      this.explorerModel.navigateToUp();
-    }
+    this.explorerModel.changecurrentLocation(this.explorerModel.currentLocation.data.path.slice(0, index + 1));
   }
 
 
@@ -55,7 +52,7 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.explorerModel.$searchBar = fromEvent<Event>(this.searchbar.nativeElement, 'keypress');
+    this.explorerModel.$searchBar = merge(fromEvent<Event>(this.searchbar.nativeElement, 'keypress'), fromEvent<Event>(this.searchbar.nativeElement, 'focus'));
     this.explorerModel.$searchBar.pipe(
       debounceTime(500)
     ).subscribe((event) => {
@@ -66,6 +63,7 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
 
   ngOnInit(): void {
     this.explorerModel = new FileExplorer([]);
