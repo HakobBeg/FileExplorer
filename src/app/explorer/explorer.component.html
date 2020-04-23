@@ -1,0 +1,87 @@
+<div class="Content">
+<mat-card cdkDrag (keydown.enter)="explorerModel.moveIn()" (keydown.escape)="explorerModel.navigateToUp()" (keydown.arrowDown)="explorerModel.stepDownSelected()" (keydown.arrowUp)="explorerModel.stepUpSelected()"  tabindex="0">
+  <div class="Panel" cdkDragHandle>
+    <div class="Icon"> <img src="../../assets/fileexplorer.png"> <label>File Explorer</label></div>
+    <img class="pan"  src="../../assets/panel.png">
+  </div>
+  <div class="Tools">
+  <div class="Arrows">
+    <svg fill="white" (click)="explorerModel.stepBack()" [ngStyle]="{'fill':explorerModel.arrowSates.left ? '' : 'rgba(212,212,212,0.58)'}" [style]="(explorerModel.arrowSates.left)?'pointer-events: auto;':'pointer-events: none;'"   class="LeftArrow" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28,14H8.8l4.62-4.62C13.814,8.986,14,8.516,14,8c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-7.958,7.958  C2.334,14.866,2,15.271,2,16s0.279,1.08,0.646,1.447l7.974,7.973C11.006,25.807,11.469,26,12,26c1.188,0,2-1.016,2-2  c0-0.516-0.186-0.986-0.58-1.38L8.8,18H28c1.104,0,2-0.896,2-2S29.104,14,28,14z"/></svg>
+    <svg fill="white" (click)="explorerModel.stepForward()" [ngStyle]="{'fill':explorerModel.arrowSates.right ? '' : 'rgba(212,212,212,0.58)' }" [style]="(explorerModel.arrowSates.right)?'pointer-events: auto;':'pointer-events: none;'" class="RightArrow" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28,14H8.8l4.62-4.62C13.814,8.986,14,8.516,14,8c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-7.958,7.958  C2.334,14.866,2,15.271,2,16s0.279,1.08,0.646,1.447l7.974,7.973C11.006,25.807,11.469,26,12,26c1.188,0,2-1.016,2-2  c0-0.516-0.186-0.986-0.58-1.38L8.8,18H28c1.104,0,2-0.896,2-2S29.104,14,28,14z"/></svg>
+    <svg fill="white" [ngStyle]="{'fill':explorerModel.arrowSates.up ? '' : 'rgba(212,212,212,0.58)' }" (click)="explorerModel.navigateToUp()" [style]="(explorerModel.arrowSates.up)?'pointer-events: auto;':'pointer-events: none;'" class="UpArrow" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28,14H8.8l4.62-4.62C13.814,8.986,14,8.516,14,8c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-7.958,7.958  C2.334,14.866,2,15.271,2,16s0.279,1.08,0.646,1.447l7.974,7.973C11.006,25.807,11.469,26,12,26c1.188,0,2-1.016,2-2  c0-0.516-0.186-0.986-0.58-1.38L8.8,18H28c1.104,0,2-0.896,2-2S29.104,14,28,14z"/></svg>
+
+  </div>
+
+  <div class="PathSpace">
+    <div class="PathObjects">
+      <img style="width: 20px;height: 20px" src="../../assets/folder.svg">
+      <div class="PathObjectLabels">
+        <label  *ngFor="let path of explorerModel.currentLocation.data.path; let i = index"><img class="pathExpand" src="../../assets/expand.svg" alt="loading"><span (click)="navigateTo(i)">{{path}}</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div (blur)="explorerModel.searchResShow = false;" class="SearchBar" tabindex="0">
+    <img src="../../assets/search.svg" alt="loading">
+    <input  autofocus  #searchbar [(ngModel)]="explorerModel.searchabarTest"  spellcheck="false" [placeholder]="'Search  ' + explorerModel.currentLocation.name">
+    <div  *ngIf="explorerModel.searchResShow" (blur)="explorerModel.searchResShow=false;" class="SearchResults">
+      <div (click)="explorerModel.changeCurrentLocation(file);explorerModel.searchResShow=false" class="SearchResultsContent" *ngFor="let file of explorerModel.searchResult">
+      <img  *ngIf="file.data.type === 'folder'" style="width: 20px;height: 20px" src="../../assets/folder.svg">
+      <img *ngIf="file.data.type === 'file'" style="width: 20px;height: 20px" src="../../assets/text.svg">
+        <label>{{file.name}}</label>
+      </div>
+      <div *ngIf="explorerModel.searchResult.length === 0" class="NoSuch">
+        <label >No such files Found</label>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="QuickAccess">
+
+    <p class="title">Instruction</p>
+    <p style="color: whitesmoke;font-weight: bold">Icons</p>
+    <label><img src="../../assets/arrow.svg">Navigate to previous path</label>
+    <label><img style="transform: rotate(90deg)" src="../../assets/arrow.svg">Navigate up to hierarchy</label>
+    <label><img style="transform: rotate(180deg)" src="../../assets/arrow.svg">Navigate to next path</label>
+   <br>
+    <p style="color: whitesmoke;font-weight: bold">Keyboard Arrows</p>
+    <label><img style="transform: rotate(270deg)" src="../../assets/arrow.svg">Change Selected item(Up)</label>
+    <label style="font-size: 12px"><img style="transform: rotate(90deg)" src="../../assets/arrow.svg">Change Selected item(Down)</label>
+    <label><span style="font-weight: bold">ESC</span>   Location hierarchical Up</label>
+    <label><span style="font-weight: bold">ENTER</span>   Go Inside selected</label>
+   <br>
+    <p style="color: whitesmoke; font-weight: bold">Other</p>
+    <label>Drag window, grabbing the top of the window.</label>
+  </div>
+
+  <table mat-table [dataSource]="explorerModel.tableState" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef (click)="explorerModel.sortTableStateBy(NameComporator)"> Name </th>
+      <td mat-cell *matCellDef="let element" > <img [src]=" (element.data.type ==='folder')?'../../assets/folder.svg':'../../assets/text.svg'" style="height: 20px;width: 20px" alt="loading"><label class="NameLabel">{{element.name}}</label> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef (click)="explorerModel.sortTableStateBy(DateComporator)"> Date Modified </th>
+      <td mat-cell *matCellDef="let element"> {{element.data.modificationDate | date:'short'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.data.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef (click)="explorerModel.sortTableStateBy(sizeComparator)"> Size </th>
+      <td mat-cell *matCellDef="let element"> {{element.data.size}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="explorerModel.displayTableColumns"></tr>
+    <tr tabindex="1" (dblclick)="explorerModel.changecurrentLocation(row.data.path); row.selected = false" (click)="explorerModel.unselect();row.selected = true" (blur)="row.selected = false" [ngStyle]="{'background-color':row.selected === true ? 'rgba(227,227,227,0.51)' : '' }" mat-row *matRowDef="let row; columns: explorerModel.displayTableColumns;"></tr>
+  </table>
+
+</mat-card>
+</div>
