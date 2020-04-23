@@ -1,0 +1,338 @@
+
+.Content{
+  width: 1200px;
+  height: 1000px;
+}
+
+mat-card {
+  width: 80%;
+  height: 50%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10%;
+  background-color: #202020;
+  padding: 0;
+  outline: none;
+}
+
+table {
+  width: 80%;
+  background-color: #202020;
+  box-shadow: none;
+  display: inline-table;
+  position: absolute;
+  top: 67px
+}
+
+
+
+.mat-cell, .mat-header-cell {
+  border: none !important;
+  color: rgb(255, 255, 255);
+  height: 15px;
+  font-family: "Segoe UI Symbol";
+  font-weight: lighter;
+}
+
+.mat-header-cell {
+  padding-left: 10px;
+  border-right: 1px solid !important;
+  border-color: rgba(182, 182, 182, 0.53) !important;
+}
+
+.mat-header-cell:hover {
+  background-color: rgba(163, 163, 163, 0.26)
+}
+
+
+.mat-cell {
+  font-size: 12px !important;
+  padding-left: 15px;
+}
+
+.mat-cell img {
+  position: relative;
+  top: 1px;
+  margin-right: 4px;
+
+}
+
+tr.mat-row:hover {
+  background-color: rgba(163, 163, 163, 0.36)
+}
+.Disable{
+  pointer-events: none;
+}
+
+.Enable{
+  pointer-events: auto;
+}
+
+
+tr.mat-header-row {
+  height: 30px;
+  user-select: none;
+}
+
+tr.mat-row, tr.mat-footer-row {
+  height: 25px;
+  outline: none;
+  user-select: none;
+}
+
+.RightArrow {
+  transform: rotate(180deg);
+}
+
+.UpArrow{
+  transform: rotate(90deg);
+}
+
+.Tools {
+  width: 100%;
+  height: 35px;
+  background-color: rgba(19, 18, 18, 0.81);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  user-select: none;
+
+}
+
+.Arrows{
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  padding: 5px;
+}
+
+.Arrows svg {
+  position: relative;
+  top: 3px;
+  height: 18px;
+  width: 18px;
+  transition: 0.2s;
+  background-color: rgba(62,157,232,0);
+}
+
+
+
+.Arrows svg:hover {
+  fill: dodgerblue !important;
+}
+
+.RightArrow{
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.QuickAccess{
+  width: 20%;
+  display: inline-block;
+  height: calc(100% - 65px);
+  background-color: rgba(19, 18, 18, 0.81);
+
+}
+
+.SearchResultsContent{
+  color: whitesmoke;
+  display: block;
+  padding: 5px;
+  transition: 3ms;
+}
+
+.SearchResultsContent label{
+  font-family: "Segoe UI Symbol";
+  margin-left: 4px;
+}
+
+.SearchResultsContent:hover{
+  background-color: rgba(163, 163, 163, 0.36)
+}
+.QuickAccess label img{
+  height: 18px;
+  width: 18px;
+  margin-right: 10px;
+}
+.Loading{
+  cursor: wait;
+  pointer-events: none;
+}
+
+.QuickAccess{
+  text-align: center;
+  user-select: none;
+}
+
+.QuickAccess label{
+  color: whitesmoke;
+  font-size: 14px;
+  font-family: "Segoe UI Symbol";
+  display: block;
+}
+.QuickAccess p{
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.title{
+  font-family: "Segoe UI Symbol";
+  font-size: 20px;
+  color: whitesmoke;
+  padding: 10px;
+}
+
+.pan{
+  position: relative;
+  left: 825px;
+  top: -29px;
+}
+
+.NoSuch{
+  color: whitesmoke;
+  display: block;
+  padding: 5px;
+}
+
+.NoSuch label{
+  font-family: "Segoe UI Symbol";
+  margin-left: 4px;
+}
+
+
+.NameLabel{
+  vertical-align: top;
+}
+
+.PathSpace{
+  width: 58%;
+  background-color: rgba(19, 18, 18, 0.81);
+  border-style: solid;
+  border-color: rgba(194, 194, 194, 0.27);
+  border-width: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.SearchBar{
+  width: 28%;
+  background-color: rgba(19, 18, 18, 0.81);
+  border-style: solid;
+  border-color: rgba(194, 194, 194, 0.27);
+  border-width: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  outline: none;
+}
+
+.SearchBar img{
+  width: 18px;
+  height: 18px;
+  position: relative;
+  top: 3px;
+}
+
+.SearchBar input{
+  margin-left: 7px;
+  background-color: rgba(147,147,147,0);
+  border-style: none;
+  outline: none;
+  font-family: "Segoe UI Symbol";
+  font-size: 12px;
+  color: whitesmoke;
+  text-decoration: none;
+  width: 88%;
+
+}
+
+.SearchBar input::selection{
+  background: rgba(92, 92, 92, 0.85);
+}
+
+
+.SearchResults{
+  width: 28%;
+  z-index: 1110;
+ position: absolute;
+  background-color: rgba(19, 18, 18, 0.81);
+  border-style: solid;
+  border-color: rgba(194, 194, 194, 0.27);
+  border-width: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  left: 666px;
+}
+
+
+.PathSpace label{
+  color: white;
+  font-size: 12px;
+  font-family: "Segoe UI Symbol";
+  margin-right: 7px;
+}
+
+.PathSpace img{
+  position: absolute;
+  height: 20px;
+  width: 20px;
+}
+
+.Panel{
+  width: 100%;
+  height: 30px;
+  background-color: rgba(19, 18, 18, 0.81);
+}
+
+.Icon img{
+  position: relative;
+  height: 28px;
+  width: 28px;
+  top: 2px;
+  left: 7px;
+}
+
+.Icon label{
+  font-size: 14px;
+  font-family: "Segoe UI Symbol";
+  color: whitesmoke;
+  position: relative;
+  top: -6px;
+  left: 10px;
+}
+
+.PathObjectLabels{
+  margin-left: 25px;
+}
+
+.PathObjectLabels span{
+  padding: 4px;
+  transition: 300ms;
+}
+
+.PathObjectLabels span:hover{
+  background-color: rgba(163, 163, 163, 0.36) !important;
+}
+
+.pathExpand{
+  transform: rotate(-90deg) !important;
+  height: 13px !important;
+  width: 25px !important;
+  position: relative !important;
+  top: 2px !important;
+  transition: 300ms;
+
+}
+
+.pathExpand:hover{
+  background-color: rgba(163, 163, 163, 0.36) !important;
+}
+
+
+

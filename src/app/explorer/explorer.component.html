@@ -1,4 +1,4 @@
-<div class="Content">
+<div class="Content" [class.Loading] = explorerModel.loading>
 <mat-card cdkDrag (keydown.enter)="explorerModel.moveIn()" (keydown.escape)="explorerModel.navigateToUp()" (keydown.arrowDown)="explorerModel.stepDownSelected()" (keydown.arrowUp)="explorerModel.stepUpSelected()"  tabindex="0">
   <div class="Panel" cdkDragHandle>
     <div class="Icon"> <img src="../../assets/fileexplorer.png"> <label>File Explorer</label></div>
@@ -40,20 +40,21 @@
 
   <div class="QuickAccess">
 
-    <p class="title">Instruction</p>
+    <p class="title">Instructions</p>
     <p style="color: whitesmoke;font-weight: bold">Icons</p>
     <label><img src="../../assets/arrow.svg">Navigate to previous path</label>
     <label><img style="transform: rotate(90deg)" src="../../assets/arrow.svg">Navigate up to hierarchy</label>
     <label><img style="transform: rotate(180deg)" src="../../assets/arrow.svg">Navigate to next path</label>
-   <br>
+
     <p style="color: whitesmoke;font-weight: bold">Keyboard Arrows</p>
     <label><img style="transform: rotate(270deg)" src="../../assets/arrow.svg">Change Selected item(Up)</label>
     <label style="font-size: 12px"><img style="transform: rotate(90deg)" src="../../assets/arrow.svg">Change Selected item(Down)</label>
     <label><span style="font-weight: bold">ESC</span>   Location hierarchical Up</label>
     <label><span style="font-weight: bold">ENTER</span>   Go Inside selected</label>
-   <br>
+
     <p style="color: whitesmoke; font-weight: bold">Other</p>
     <label>Drag window, grabbing the top of the window.</label>
+    <label>The keyboard shortcut works after clicking on window content(After focusing).</label>
   </div>
 
   <table mat-table [dataSource]="explorerModel.tableState" class="mat-elevation-z8">
