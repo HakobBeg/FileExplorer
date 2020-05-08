@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 
 @Injectable({
@@ -6,10 +6,12 @@ import {AngularFireDatabase} from '@angular/fire/database';
 })
 export class DatabaseWorkerService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {
+  }
 
-getFiles(){
+  getFiles(): Promise<any> {
+
     return this.db.database.ref('filesData').once('value');
-}
+  }
 
 }

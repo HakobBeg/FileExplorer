@@ -8,30 +8,30 @@ export class Turing<T> {
     this.index = index;
   }
 
-  addElement(element: T) {
+  addElement(element: T): void {
     this.data = this.data.slice(0, ++this.index + 1);
     this.data.push(element);
   }
 
-  forward() {
+  forward(): T {
     if (this.index === this.data.length - 1) {
       return null;
     }
     return this.data[++this.index];
   }
 
-  backward() {
+  backward(): T {
     if (this.index <= 0) {
       return null;
     }
     return this.data[--this.index];
   }
 
-  getCurrent() {
+  getCurrent(): T {
     return (this.index !== -1) ? this.data[this.index] : null;
   }
 
-  clearMachine() {
+  clearMachine(): void {
     this.data = [];
     this.index = -1;
   }

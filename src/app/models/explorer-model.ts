@@ -1,7 +1,8 @@
-import {BTree, FileNode} from './BTree';
-import {Turing} from './simpleModels';
-import {File} from './FileModel';
-import {Observable, Subject} from 'rxjs';
+import {BTree} from './b-tree';
+import {Turing} from './turing-machine-model';
+import {File} from './file-model';
+import {Observable} from 'rxjs';
+import {FileNode} from './file-node-model';
 
 
 export class FileExplorer {
@@ -16,7 +17,7 @@ export class FileExplorer {
   arrowSates = {left: false, right: false, up: false};
   searchabarTest = '';
   searchResShow = false;
-  $searchBar: Observable<Event>;
+  searchBar$: Observable<Event>;
   searchResult: FileNode[] = [];
   loading = true;
 
@@ -26,7 +27,7 @@ export class FileExplorer {
 
   }
 
-  moveIn() {
+  moveIn(): void {
     this.currentLocation.children.forEach((file) => {
       if (file.selected) {
         file.selected = false;
@@ -36,7 +37,7 @@ export class FileExplorer {
     });
   }
 
-  searchFileFrom(name: string, location: FileNode) {
+  searchFileFrom(name: string, location: FileNode): void {
 
     if (location.children.size === 0) {
       return;
@@ -55,13 +56,13 @@ export class FileExplorer {
 
   }
 
-  unselect() {
+  unselect(): void {
     for (const value of this.currentLocation.children.values()) {
       value.selected = false;
     }
   }
 
-  stepDownSelected() {
+  stepDownSelected(): void {
 
     let flag = false;
     const arr = Array.from(this.currentLocation.children);
@@ -81,7 +82,7 @@ export class FileExplorer {
     }
   }
 
-  stepUpSelected() {
+  stepUpSelected(): void {
     const arr = Array.from(this.currentLocation.children);
     if (arr[0][1].selected) {
       return;
@@ -98,14 +99,14 @@ export class FileExplorer {
   }
 
 
-  stepBack() {
+  stepBack(): void {
     this.currentLocation = this.locationMemory.backward();
     this.currentPath = this.currentLocation.data.path;
     this.updateArrowStates();
     this.updateTable();
   }
 
-  stepForward() {
+  stepForward(): void {
 
     this.currentLocation = this.locationMemory.forward();
     this.currentPath = this.currentLocation.data.path;
@@ -114,7 +115,7 @@ export class FileExplorer {
   }
 
 
-  resetDataStruct(data: File[]) {
+  resetDataStruct(data: File[]): void {
     this.data = data;
     this.dataStruct = new BTree(this.data);
     this.currentPath = ['root'];
@@ -124,32 +125,32 @@ export class FileExplorer {
     this.updateArrowStates();
   }
 
-  updateTable() {
+  updateTable(): void {
     this.tableState = Array.from(this.currentLocation.children.values());
     this.updateArrowStates();
   }
 
-  updateArrowStates() {
+  updateArrowStates(): void {
     this.arrowSates.up = (this.currentLocation.parentNode !== null);
     this.arrowSates.left = (this.locationMemory.index > 0);
     this.arrowSates.right = (this.locationMemory.index < this.locationMemory.data.length - 1);
   }
 
-  changecurrentLocation(path: string[]) {
+  changecurrentLocation(path: string[]): void {
     this.currentLocation = this.dataStruct.search(path);
     this.currentPath = path;
     this.locationMemory.addElement(this.currentLocation);
     this.updateTable();
   }
 
-  changeCurrentLocation(newLocation: FileNode) {
+  changeCurrentLocation(newLocation: FileNode): void {
     this.currentLocation = newLocation;
     this.currentPath = newLocation.data.path;
     this.updateArrowStates();
     this.updateTable();
   }
 
-  navigateToUp() {
+  navigateToUp(): void {
     if (this.currentLocation.parentNode) {
       this.currentPath = this.currentLocation.parentNode.data.path;
       this.currentLocation = this.currentLocation.parentNode;
@@ -159,7 +160,7 @@ export class FileExplorer {
     }
   }
 
-  sortTableStateBy(comp: any) {
+  sortTableStateBy(comp: any): void {
     this.tableState = Array.from(this.currentLocation.children.values()).sort(comp);
   }
 
